@@ -90,10 +90,10 @@ const CriarAnuncio = () => {
         <div className="max-w-3xl mx-auto">
           <div className="mb-8">
             <h1 className="text-3xl font-bold text-gray-900 mb-2">
-              Criar Anúncio
+              Criar Anúncio - Fator Rural
             </h1>
             <p className="text-gray-600">
-              Preencha as informações abaixo para anunciar seu produto ou serviço
+              Preencha as informações abaixo para anunciar no Fator Rural
             </p>
           </div>
 
@@ -129,7 +129,7 @@ const CriarAnuncio = () => {
                 className="flex-1 bg-green-700 hover:bg-green-800"
                 disabled={loading}
               >
-                {loading ? "Publicando..." : "Publicar Anúncio"}
+                {loading ? "Publicando no Fator Rural..." : "Publicar no Fator Rural"}
               </Button>
             </div>
           </form>

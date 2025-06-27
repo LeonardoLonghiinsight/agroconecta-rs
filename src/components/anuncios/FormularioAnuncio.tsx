@@ -1,4 +1,3 @@
-
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
@@ -49,7 +48,7 @@ export const FormularioAnuncio = ({
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Informações do Anúncio</CardTitle>
+        <CardTitle>Informações do Anúncio - Fator Rural</CardTitle>
       </CardHeader>
       <CardContent className="space-y-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -108,7 +107,7 @@ export const FormularioAnuncio = ({
             type="text"
             value={formData.titulo}
             onChange={(e) => onFormDataChange("titulo", e.target.value)}
-            placeholder="Ex: Gado Nelore - Lote com 50 cabeças"
+            placeholder="Ex: Gado Nelore - Lote com 50 cabeças - Fator Rural"
             required
           />
         </div>
@@ -131,12 +130,12 @@ export const FormularioAnuncio = ({
             id="descricao"
             value={formData.descricao}
             onChange={(e) => onFormDataChange("descricao", e.target.value)}
-            placeholder="Descreva detalhadamente seu produto ou serviço..."
+            placeholder="Descreva detalhadamente seu produto ou serviço para o Fator Rural..."
             rows={6}
             required
           />
           <p className="text-sm text-gray-500">
-            Seja específico sobre características, estado, origem e outros detalhes importantes.
+            Seja específico sobre características, estado, origem e outros detalhes importantes para os usuários do Fator Rural.
           </p>
         </div>
       </CardContent>

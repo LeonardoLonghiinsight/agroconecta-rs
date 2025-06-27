@@ -13,7 +13,7 @@ export const UploadImagens = ({ imagens, onImageUpload, onRemoveImage }: UploadI
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Fotos do Anúncio</CardTitle>
+        <CardTitle>Fotos do Anúncio - Fator Rural</CardTitle>
       </CardHeader>
       <CardContent>
         <div className="space-y-4">
@@ -39,7 +39,7 @@ export const UploadImagens = ({ imagens, onImageUpload, onRemoveImage }: UploadI
                 }
               </p>
               <p className="text-sm text-gray-500 mt-1">
-                Máximo: 10 imagens | Formatos: JPG, PNG, WebP
+                Máximo: 10 imagens para o Fator Rural | Formatos: JPG, PNG, WebP
               </p>
             </label>
           </div>
