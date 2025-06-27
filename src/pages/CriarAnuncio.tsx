@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -6,8 +5,9 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Upload, X, Image as ImageIcon } from "lucide-react";
+import { Upload, X } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { CamposEspecificos } from "@/components/anuncios/CamposEspecificos";
 
 const CriarAnuncio = () => {
   const [loading, setLoading] = useState(false);
@@ -19,6 +19,7 @@ const CriarAnuncio = () => {
     preco: "",
     cidade: ""
   });
+  const [camposEspecificos, setCamposEspecificos] = useState<Record<string, string>>({});
   const { toast } = useToast();
 
   const categorias = [
@@ -40,7 +41,7 @@ const CriarAnuncio = () => {
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = Array.from(e.target.files || []);
-    const newImages = files.slice(0, 10 - imagens.length); // Máximo 10 imagens
+    const newImages = files.slice(0, 10 - imagens.length);
     setImagens(prev => [...prev, ...newImages]);
   };
 
@@ -48,16 +49,28 @@ const CriarAnuncio = () => {
     setImagens(prev => prev.filter((_, i) => i !== index));
   };
 
+  const handleCampoEspecificoChange = (campo: string, valor: string) => {
+    setCamposEspecificos(prev => ({
+      ...prev,
+      [campo]: valor
+    }));
+  };
+
+  const handleCategoriaChange = (value: string) => {
+    setFormData(prev => ({ ...prev, categoria: value }));
+    setCamposEspecificos({});
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
 
     try {
-      // Simular criação do anúncio
       await new Promise(resolve => setTimeout(resolve, 2000));
       
       console.log("Anúncio criado:", {
         ...formData,
+        camposEspecificos,
         imagens: imagens.map(img => img.name),
         timestamp: new Date().toISOString()
       });
@@ -75,6 +88,7 @@ const CriarAnuncio = () => {
         preco: "",
         cidade: ""
       });
+      setCamposEspecificos({});
       setImagens([]);
     } catch (error) {
       toast({
@@ -112,7 +126,7 @@ const CriarAnuncio = () => {
                     <Label htmlFor="categoria">Categoria *</Label>
                     <Select
                       value={formData.categoria}
-                      onValueChange={(value) => setFormData(prev => ({ ...prev, categoria: value }))}
+                      onValueChange={handleCategoriaChange}
                     >
                       <SelectTrigger>
                         <SelectValue placeholder="Selecione uma categoria" />
@@ -146,6 +160,15 @@ const CriarAnuncio = () => {
                     </Select>
                   </div>
                 </div>
+
+                {/* Campos Específicos por Categoria */}
+                {formData.categoria && (
+                  <CamposEspecificos
+                    categoria={formData.categoria}
+                    valores={camposEspecificos}
+                    onChange={handleCampoEspecificoChange}
+                  />
+                )}
 
                 <div className="space-y-2">
                   <Label htmlFor="titulo">Título do Anúncio *</Label>

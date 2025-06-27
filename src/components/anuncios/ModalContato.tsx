@@ -4,6 +4,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 
 interface ModalContatoProps {
@@ -26,7 +27,8 @@ export const ModalContato = ({
     nome: "",
     telefone: "",
     email: "",
-    cidade: ""
+    cidade: "",
+    mensagem: ""
   });
   const { toast } = useToast();
 
@@ -39,7 +41,7 @@ export const ModalContato = ({
       await new Promise(resolve => setTimeout(resolve, 1000));
       
       // Aqui salvaríamos o lead no banco de dados
-      console.log("Lead gerado:", {
+      console.log("Lead qualificado gerado:", {
         ...formData,
         anuncioId,
         timestamp: new Date().toISOString()
@@ -47,7 +49,7 @@ export const ModalContato = ({
 
       toast({
         title: "Contato revelado!",
-        description: "Agora você pode ver as informações de contato do vendedor.",
+        description: "Sua mensagem foi enviada e agora você pode ver as informações de contato do vendedor.",
       });
 
       onSuccess();
@@ -125,11 +127,25 @@ export const ModalContato = ({
             />
           </div>
 
+          <div className="space-y-2">
+            <Label htmlFor="mensagem">Sua mensagem (opcional)</Label>
+            <Textarea
+              id="mensagem"
+              value={formData.mensagem}
+              onChange={(e) => handleChange("mensagem", e.target.value)}
+              placeholder="Apresente-se ou faça uma pergunta sobre o anúncio..."
+              rows={4}
+            />
+            <p className="text-sm text-gray-500">
+              Uma mensagem personalizada aumenta suas chances de resposta.
+            </p>
+          </div>
+
           <div className="bg-green-50 border border-green-200 rounded-lg p-4">
             <p className="text-sm text-green-800">
               <strong>🔒 Seus dados estão seguros.</strong> Ao preencher este formulário, 
               você poderá ver as informações de contato do vendedor e ele também 
-              receberá seus dados para entrar em contato.
+              receberá seus dados e sua mensagem para entrar em contato.
             </p>
           </div>
 
